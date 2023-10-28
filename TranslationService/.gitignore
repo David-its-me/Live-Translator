@@ -1,5 +1,6 @@
 # seamless model
 .pt
+.crdownload
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
