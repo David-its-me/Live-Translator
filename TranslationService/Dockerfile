@@ -8,11 +8,13 @@ RUN apt update
 RUN pip install --upgrade pip
 RUN apt-get --yes install libsndfile1
 
-WORKDIR /build
 
-# Download the model
-RUN wget "https://huggingface.co/facebook/seamless-m4t-large/resolve/main/multitask_unity_large.pt" /assets/multitask_unity_large.pt
-COPY ./assets /build/assets
+# Put the model into the torch cache, to avoid long download time.
+#RUN wget "https://huggingface.co/facebook/seamless-m4t-large/resolve/main/multitask_unity_large.pt" /assets/multitask_unity_large.pt
+#COPY ./assets /build/assets
+COPY ./assets root/.cache/torch/hub/fairseq2/assets/checkpoints/43b8b74ddb6b78486fb47754
+
+WORKDIR /build
 
 # Install Python Packages
 COPY ./requirements.txt /build/requirements.txt

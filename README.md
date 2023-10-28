@@ -12,11 +12,18 @@ The translation is done in a separate service, to be able to adapt to higher loa
 The Service is accessible over a REST API, over which the translation of .wav files is initiated.
 
 ### Installation
-The translation service runs in a Docker Container. 
+Bevore building, we recommend to download the language model manually. Otherwise the Docker container would download, when a container runs the first time from an already builded container image. This might be anoying during development.After Download the model must be placed in the _assets/_ folder. Make sure that the file is named exactly _multitask_unity_large.pt_ or _multitask_unity_medium.pt_ For more information please refer to the repository https://github.com/facebookresearch/seamless_communication
 
+| Model Name         | #params | checkpoint                                                                              | metrics                                                                              |
+| ------------------ | ------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| SeamlessM4T-Large  | 2.3B    | [🤗 Model card](https://huggingface.co/facebook/seamless-m4t-large) - [download](https://huggingface.co/facebook/seamless-m4t-large/resolve/main/multitask_unity_large.pt)   | [metrics](https://dl.fbaipublicfiles.com/seamlessM4T/metrics/seamlessM4T_large.zip)  |
+| SeamlessM4T-Medium | 1.2B    | [🤗 Model card](https://huggingface.co/facebook/seamless-m4t-medium) - [download](https://huggingface.co/facebook/seamless-m4t-medium/resolve/main/multitask_unity_medium.pt) | [metrics](https://dl.fbaipublicfiles.com/seamlessM4T/metrics/seamlessM4T_medium.zip) |
+
+
+Now having downloaded the model file we build an run the translation service.The translation service runs in a Docker container. 
 Bevor you go ahead, please make sure that docker is installed on your system. For more information please refer to the official webpage: https://docs.docker.com/.
 
-Run the following command, to build the application. You can give your docker image a `<image-tag>`, which is used to distinguish images.
+Run the following command, to build the application. You can give your docker image a `<image-tag>`, which is used to distinguish docker images.
 ```
 docker build -t <image-tag> .
 ```
